@@ -9,6 +9,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('config-lite');
 var routes = require('./routes');
+var pkg = require('./package.json');
+var winston = require('winston');
+var expressWinston = require('express-winston');
 
 var app = express();
 
@@ -36,24 +39,55 @@ app.use(session({
 }));
 app.use(flash());
 
+app.use(require('express-formidable')({
+  uploadDir: path.join(__dirname, 'public/img'),
+  keepExtensions: true
+}));
+
+app.locals.blog = {
+  title: pkg.name,
+  description: pkg.description
+};
+
+app.use(function (req, res, next) {
+  res.locals.use = req.session.user;
+  res.locals.success = req.flash('success').toString();
+  res.locals.error = req.flash('error').toString();
+  next();
+});
+
 routes(app);
 
+app.use(expressWinston.errorLogger({
+  transports: [
+    new winston.transports.Console({
+      json: true,
+      colorize: true
+    }),
+    new winston.transports.File({
+      filename: 'logs/error.log'
+    })
+  ]
+}));
+
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+// app.use(function(req, res, next) {
+//   var err = new Error('Not Found');
+//   err.status = 404;
+//   next(err);
+// });
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  // res.locals.message = err.message;
+  // res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // res.status(err.status || 500);
+  res.render('error', {
+    error: err
+  });
 });
 
 module.exports = app;

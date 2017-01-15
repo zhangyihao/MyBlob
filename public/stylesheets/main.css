@@ -1,0 +1,9 @@
+body {
+  padding: 60px 20px;
+}
+.main {
+  max-width: 500px;
+}
+.alert{
+  padding: 10px;
+}
