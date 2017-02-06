@@ -27,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
+  resave: false,
+  saveUninitialized: true,
   name: config.session.key,
   secret: config.session.secret,
   cookie: {
@@ -50,7 +52,7 @@ app.locals.blog = {
 };
 
 app.use(function (req, res, next) {
-  res.locals.use = req.session.user;
+  res.locals.user = req.session.user;
   res.locals.success = req.flash('success').toString();
   res.locals.error = req.flash('error').toString();
   next();

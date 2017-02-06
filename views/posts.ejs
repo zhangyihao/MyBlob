@@ -18,39 +18,15 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <!--下面代码用来当浏览器宽度较小时，右侧展示三个横线，隐藏其他导航项，-->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-nav-demo">
-                <span class="sr-only">aaa</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">MyBolb</a>
-        </div>
-        <div class="collapse navbar-collapse" id="menu-nav-demo">
-            <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="#">个人主页</a></li>
-                <li><a href="#">发表文章</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/signout">登出</a></li>
-                <li><a href="#">登录</a></li>
-                <li><a href="#">注册</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<%- include('nav') %>
 
 <div class="container">
     <div class="row">
         <% if(success){ %>
-        <div class="alert alert-success col-md-12 col-xs-12"><%= success %></div>
+        <div id="message" class="alert alert-success col-md-12 col-xs-12"><%= success %></div>
         <% }%>
         <% if(error){ %>
-        <div class="alert alert-danger col-md-12 col-xs-12"><%= error %></div>
+        <div id="message" class="alert alert-danger col-md-12 col-xs-12"><%= error %></div>
         <% }%>
     </div>
     <div class="row panel panel-default">
@@ -123,5 +99,10 @@
 <script src="/javascript/jquery-3.1.1.min.js"></script>
 <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
 <script src="/bootstrap/js/bootstrap.min.js"></script>
+<script>
+  setTimeout(function () {
+    $('#message').fadeOut();
+  }, 3000);
+</script>
 </body>
 </html>

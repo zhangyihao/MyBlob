@@ -4,55 +4,35 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap的HTML标准模板</title>
     <!-- Bootstrap -->
-    <link href="/stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href='/stylesheets/style.css' rel='stylesheet' />
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/main.css" rel="stylesheet">
-    <title>Title</title>
+    <title>登录</title>
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <!--下面代码用来当浏览器宽度较小时，右侧展示三个横线，隐藏其他导航项，-->
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-nav-demo">
-                <span class="sr-only">aaa</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">MyBolb</a>
-        </div>
-        <div class="collapse navbar-collapse" id="menu-nav-demo">
-            <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="#">个人主页</a></li>
-                <li><a href="#">发表文章</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">登出</a></li>
-                <li><a href="#">登录</a></li>
-                <li><a href="#">注册</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
+<%- include('nav') %>
 
 <div class="container main">
     <div class="row">
-        <div class="alert alert-success col-md-12 col-xs-12">登录成功！</div>
+        <% if(success){ %>
+        <div class="alert alert-success col-md-12 col-xs-12"><%= success %></div>
+        <% }%>
+        <% if(error){ %>
+        <div class="alert alert-danger col-md-12 col-xs-12"><%= error %></div>
+        <% }%>
     </div>
-    <form class="form-signin">
+    <form class="form-signin" method="post" enctype="multipart/form-data">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="form-group">
                     <label>用户名</label>
-                    <input class="form-control" type="text" placeholder="请输入用户名" />
+                    <input class="form-control" name="username" value="<%= username %>" type="text" placeholder="请输入用户名" />
                 </div>
                 <div class="form-group">
                     <label>密码</label>
-                    <input class="form-control" type="text" placeholder="请输入密码" />
+                    <input class="form-control" name="password" value="<%= password %>" type="text" placeholder="请输入密码" />
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">登录</button>
             </div>
