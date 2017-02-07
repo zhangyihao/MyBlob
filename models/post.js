@@ -21,6 +21,17 @@ Post.plugin('contentToHtml', {
   }
 });
 
+Post.plugin('addCommentsCount', {
+  afterFind: function (posts) {
+    return Promise.all(posts.map(function (post) {
+      return CommentModel.getCommentsCount(post._id)
+        .then(function (commentscount) {
+
+        });
+    }));
+  }
+})
+
 module.exports = {
   //发布文章
   create: function create(post) {
@@ -36,9 +47,37 @@ module.exports = {
   },
   
   getPosts: function (author) {
-    
+    var query = {};
+    if(typeof(author)!=="undefined" && author!==null) {
+      query.author = author;
+    }
+    return Post.find(query)
+      .populate({path: 'author', model: 'User'})
+      .sort({_id: -1})
+      .addCreatedAt()
+      .contentToHtml()
+      .exec();
+  },
+
+  incPv : function (postId) {
+    return Post.update({_id: postId}, {$inc:{pv:1}})
+      .exec();
+  },
+
+  getRawPostById: function (postId) {
+    return Post.findOne({_id: postId})
+      .populate({path: 'author', model:'User'})
+      .exec();
+  },
+
+  updatePostById: function (postId, author, title, data) {
+    return Post.update({author: author, _id:postId},
+      {$set:{title:title, content:data}}).exec();
+  },
+
+  delPostById: function (postId, author) {
+    return Post.remove({author: author, _id: postId}).exec();
   }
 
-}
-;
+};
 

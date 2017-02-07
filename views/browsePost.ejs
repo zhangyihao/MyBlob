@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文章</title>
+    <!-- Bootstrap -->
+    <link href='/stylesheets/style.css' rel='stylesheet' />
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/main.css" rel="stylesheet">
+    <style type="text/css">
+        .content-foot {
+            float: right;
+        }
+        .content-foot li {
+            float: right;
+            list-style: none;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<%- include('nav') %>
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h2><%= post.title %></h2>
+            <p><%- post.content %></p>
+            <div >
+                <span><%= post.created_at %></span>
+                <ul class="content-foot">
+                    <% if(typeof(user) !=='undefined' && typeof(post.author._id)!=='undefined'
+                            && post.author._id.toString() === user._id.toString()) { %>
+                    <li><a href="/posts/<%=post._id%>/remove">删除</a></li>
+                    <li><a href="/posts/<%=post._id%>/edit">编辑</a></li>
+                    <% } %>
+                    <li><a href="#">留言（3）</a></li>
+                    <li><a href="#">浏览（<%= post.pv %>）</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <%- include('comments') %>
+</div>
+
+<!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
+<script src="/javascript/jquery-3.1.1.min.js"></script>
+<!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

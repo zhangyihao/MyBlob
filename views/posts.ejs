@@ -9,10 +9,14 @@
     <link href='/stylesheets/style.css' rel='stylesheet' />
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/stylesheets/main.css" rel="stylesheet">
-    <title>Title</title>
     <style type="text/css">
         .content-foot {
             float: right;
+        }
+        .content-foot li {
+            float: right;
+            list-style: none;
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -29,70 +33,26 @@
         <div id="message" class="alert alert-danger col-md-12 col-xs-12"><%= error %></div>
         <% }%>
     </div>
-    <div class="row panel panel-default">
-        <div class=" col-xs-12 col-md-12 panel-body">
-            <h2>Hello World</h2>
-            <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <div >
-                <span>2015-12-01 12:23:09</span>
-                <a class="content-foot" href="#">留言（3）</a>
-                <a class="content-foot" href="#">浏览（23）</a>
+    <% posts.forEach(function (post) { %>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2><a href="/posts/<%= post._id %>"><%= post.title %></a></h2>
+                <p><%- post.content %></p>
+                <div >
+                    <span><%= post.created_at %></span>
+                    <ul class="content-foot">
+                        <% if(typeof(user) !=='undefined' && typeof(post.author._id)!=='undefined'
+                                && post.author._id.toString() === user._id.toString()) { %>
+                        <li><a href="/posts/<%=post._id%>/remove">删除</a></li>
+                        <li><a href="/posts/<%=post._id%>/edit">编辑</a></li>
+                        <% } %>
+                        <li><a href="#">留言（3）</a></li>
+                        <li><a href="#">浏览（<%= post.pv %>）</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row panel panel-default">
-        <div class=" col-xs-12 col-md-12 panel-body">
-            <h2>Hello World</h2>
-            <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <div >
-                <span>2015-12-01 12:23:09</span>
-                <a class="content-foot" href="#">留言（3）</a>
-                <a class="content-foot" href="#">浏览（23）</a>
-            </div>
-        </div>
-    </div>
-    <div class="row panel panel-default">
-        <div class=" col-xs-12 col-md-12 panel-body">
-            <h2>Hello World</h2>
-            <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <div >
-                <span>2015-12-01 12:23:09</span>
-                <a class="content-foot" href="#">留言（3）</a>
-                <a class="content-foot" href="#">浏览（23）</a>
-            </div>
-        </div>
-    </div>
-    <div class="row panel panel-default">
-        <div class=" col-xs-12 col-md-12 panel-body">
-            <h2>Hello World</h2>
-            <p>Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.
-                Some default panel content here. Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur. Aenean eu leo quam.
-                Pellentesque ornare sem lacinia quam venenatis vestibulum. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-            <div >
-                <span>2015-12-01 12:23:09</span>
-                <a class="content-foot" href="#">留言（3）</a>
-                <a class="content-foot" href="#">浏览（23）</a>
-            </div>
-        </div>
-    </div>
+    <% }) %>
 </div>
 
 <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->

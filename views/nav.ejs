@@ -8,13 +8,29 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="##">MyBolb</a>
+            <a class="navbar-brand" href="/posts">MyBolb</a>
         </div>
         <div class="collapse navbar-collapse" id="menu-nav-demo">
             <ul class="nav navbar-nav navbar-left">
-                <li class="active"><a href="/posts">个人主页</a></li>
+                <% if(typeof(active)!=='undefined' && active==='user') { %>
+                    <li class="active">
+                <% } else {%>
+                    <li>
+                <% }%>
+
+                <% if(!user) { %>
+                    <a href="#">个人主页</a>
+                <% } else {%>
+                    <a href="/posts?author=<%=user._id%>">个人主页</a>
+                <% }%>
+                </li>
                 <% if(user) { %>
-                    <li><a href="/posts/create">发表文章</a></li>
+                    <% if(typeof(active)!=='undefined' && active==='create') { %>
+                        <li class="active">
+                     <% } else {%>
+                        <li>
+                    <% }%>
+                    <a href="/posts/create">发表文章</a></li>
                 <% } %>
             </ul>
             <ul class="nav navbar-nav navbar-right">

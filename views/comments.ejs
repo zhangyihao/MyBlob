@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h4><b>留言</b></h4>
+        <hr class="divider"/>
+        <div class="row">
+            <% comments.forEach(function (comment) { %>
+                <div class="comment col-xs-12 col-md-12">
+                    <div><b><a href="/posts?author=<%= comment.author._id %>"><%= comment.author.name %></a></b>&nbsp;&nbsp;<%= comment.created_at %></div>
+                    <p><%- comment.content %></p>
+                </div>
+            <% })%>
+            <% if(typeof(user)!=='undefined' && user!==null) { %>
+            <form class="form-comment" method="post" action="/posts/<%= post._id %>/commnet">
+                <div class="form-group">
+                    <label class="sr-only" for="description">评论</label>
+                    <textarea class="form-control" id="description" name="bio" rows="5" ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">留言</button>
+            </form>
+            <% }%>
+        </div>
+    </div>
+</div>
