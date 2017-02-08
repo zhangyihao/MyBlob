@@ -26,7 +26,8 @@ Post.plugin('addCommentsCount', {
     return Promise.all(posts.map(function (post) {
       return CommentModel.getCommentsCount(post._id)
         .then(function (commentscount) {
-
+          post.commentsCount = commentscount;
+          return post;
         });
     }));
   }
