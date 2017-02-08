@@ -4,6 +4,7 @@
 'use strict';
 var marked = require('marked');
 var Post = require('../lib/mongo').Post;
+var CommentModel= require('./comments');
 
 Post.plugin('contentToHtml', {
   afterFind: function (posts) {
@@ -30,8 +31,19 @@ Post.plugin('addCommentsCount', {
           return post;
         });
     }));
+  },
+
+  afterFindOne: function (post) {
+    if(post) {
+      return CommentModel.getCommentsCount(post._id)
+        .then(function (count) {
+          post.commentsCount = count;
+          return post;
+        })
+    }
+    return post;
   }
-})
+});
 
 module.exports = {
   //发布文章

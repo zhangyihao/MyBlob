@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73e9e376-7e94-4818-a12a-7e0a20669b53" name="Default" comment="commit">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/models/post.js" afterPath="$PROJECT_DIR$/models/post.js" />
     </list>
     <list id="16a91db7-6609-4925-ac74-5a34f8721a36" name="Failed commit: Default" comment="commit" />
@@ -108,8 +107,8 @@
       <file leaf-file-name="post.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/post.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+            <state relative-caret-position="476">
+              <caret line="45" column="3" lean-forward="false" selection-start-line="45" selection-start-column="3" selection-end-line="45" selection-end-column="3" />
               <folding>
                 <element signature="e#0#47#0" expanded="false" />
               </folding>
@@ -829,12 +828,12 @@
       <workItem from="1484529132231" duration="8274000" />
       <workItem from="1484619013948" duration="6079000" />
       <workItem from="1485049469254" duration="9937000" />
-      <workItem from="1486346101630" duration="47141000" />
+      <workItem from="1486346101630" duration="47406000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103812000" />
+    <option name="totallyTimeSpent" value="104077000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1294,8 +1293,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/models/post.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        <state relative-caret-position="476">
+          <caret line="45" column="3" lean-forward="false" selection-start-line="45" selection-start-column="3" selection-end-line="45" selection-end-column="3" />
           <folding>
             <element signature="e#0#47#0" expanded="false" />
           </folding>
