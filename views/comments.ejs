@@ -5,15 +5,22 @@
         <div class="row">
             <% comments.forEach(function (comment) { %>
                 <div class="comment col-xs-12 col-md-12">
-                    <div><b><a href="/posts?author=<%= comment.author._id %>"><%= comment.author.name %></a></b>&nbsp;&nbsp;<%= comment.created_at %></div>
+                    <div>
+                        <b><a href="/posts?author=<%= comment.author._id %>"><%= comment.author.name %></a></b>&nbsp;&nbsp;<%= comment.created_at %>
+                        <% if(typeof(user)!=='undefined' && user!==null
+                                && typeof(comment.author._id)!=='undefined'
+                                && comment.author._id.toString() === user._id.toString()) { %>
+                            &nbsp;&nbsp;<a href="/posts/<%= post._id%>/comment/<%=comment._id%>/remove">删除</a>
+                        <% }%>
+                    </div>
                     <p><%- comment.content %></p>
                 </div>
             <% })%>
             <% if(typeof(user)!=='undefined' && user!==null) { %>
-            <form class="form-comment" method="post" action="/posts/<%= post._id %>/commnet">
+            <form class="form-comment" method="post" enctype="multipart/form-data" action="/posts/<%= post._id %>/commnet">
                 <div class="form-group">
                     <label class="sr-only" for="description">评论</label>
-                    <textarea class="form-control" id="description" name="bio" rows="5" ></textarea>
+                    <textarea class="form-control" id="description" name="content" rows="5" ></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">留言</button>
             </form>

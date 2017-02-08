@@ -18,6 +18,9 @@
             list-style: none;
             margin-right: 5px;
         }
+        .form-comment {
+            margin: auto 10px;
+        }
     </style>
 </head>
 <body>
@@ -28,17 +31,15 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <h2><%= post.title %></h2>
+            <p>发布时间：<%= post.created_at %>&nbsp;&nbsp;&nbsp;&nbsp;浏览量：<%= post.pv %></p>
             <p><%- post.content %></p>
             <div >
-                <span><%= post.created_at %></span>
                 <ul class="content-foot">
-                    <% if(typeof(user) !=='undefined' && typeof(post.author._id)!=='undefined'
+                    <% if(typeof(user) !=='undefined' && user!==null && typeof(post.author._id)!=='undefined'
                             && post.author._id.toString() === user._id.toString()) { %>
                     <li><a href="/posts/<%=post._id%>/remove">删除</a></li>
                     <li><a href="/posts/<%=post._id%>/edit">编辑</a></li>
                     <% } %>
-                    <li><a href="#">留言（3）</a></li>
-                    <li><a href="#">浏览（<%= post.pv %>）</a></li>
                 </ul>
             </div>
         </div>

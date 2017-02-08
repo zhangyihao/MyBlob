@@ -55,6 +55,7 @@ module.exports = {
     return Post.findOne({_id: postId})
       .populate({path: 'author', model: 'User'})
       .addCreatedAt()
+      .addCommentsCount()
       .contentToHtml()
       .exec();
   },
@@ -68,6 +69,7 @@ module.exports = {
       .populate({path: 'author', model: 'User'})
       .sort({_id: -1})
       .addCreatedAt()
+      .addCommentsCount()
       .contentToHtml()
       .exec();
   },
@@ -89,7 +91,12 @@ module.exports = {
   },
 
   delPostById: function (postId, author) {
-    return Post.remove({author: author, _id: postId}).exec();
+    return Post.remove({author: author, _id: postId}).exec()
+      .then(function (res) {
+        if(res.result.ok && res.result.n>0) {
+          return CommentModel.delCommentsByPostId(postId);
+        }
+      });
   }
 
 };

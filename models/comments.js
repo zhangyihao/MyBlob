@@ -16,7 +16,7 @@ Comment.plugin('contentToHtml', {
 
 module.exports = {
   create: function (comment) {
-    return comment.create(comment).exec();
+    return Comment.create(comment).exec();
   },
 
   delCommentById: function (commentId, author) {
